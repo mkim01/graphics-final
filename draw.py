@@ -297,6 +297,46 @@ def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
         y0 = y
         i+= 1
 
+def mesh(polygons, fname):
+    f = open(fname + ".obj", "r")
+    vertices = []
+    faces = []
+    for line in f:
+        points = line.strip("\r\n").split(" ")
+        i = 0
+        for p in points:
+            if(p == ""):
+                points.pop(i)
+            i += 1
+        print("Reading File")
+        if(len(points) > 0):
+            if(points[0] == "f"):
+                if(len(points) == 4): #triangles
+                    v0 = int(points[1].split("/")[0])
+                    v1 = int(points[2].split("/")[0])
+                    v2 = int(points[3].split("/")[0])
+                    print([v0, v1, v2])
+                    faces.append([v0, v1, v2])
+                elif(len(points) == 5): #quadrilaterals
+                    v0 = int(points[1].split("/")[0])
+                    v1 = int(points[2].split("/")[0])
+                    v2 = int(points[3].split("/")[0])
+                    v3 = int(points[4].split("/")[0])
+                    faces.append([v0, v1, v2])
+                    faces.append([v0, v2, v3])
+            elif(points[0] == "v"):
+                print(points)
+                if(len(points) == 4):
+                    vertices.append([float(points[1]), float(points[2]), float(points[3]), 1.0])
+                elif(len(points) == 5):
+                    vertices.append([float(points[1]), float(points[2]), float(points[3]), float(points[4])])
+    for face in faces:
+        print("Adding polygons")
+        add_polygon(polygons, vertices[face[0]-1][0], vertices[face[0]-1][1], vertices[face[0]-1][2],
+                              vertices[face[1]-1][0], vertices[face[1]-1][1], vertices[face[1]-1][2],
+                              vertices[face[2]-1][0], vertices[face[2]-1][1], vertices[face[2]-1][2])
+
+
 
 def draw_lines( matrix, screen, zbuffer, color ):
     if len(matrix) < 2:
