@@ -216,6 +216,11 @@ def run(filename):
                 display(screen)
             elif c == 'save':
                 save_extension(screen, args[0])
+            elif c == 'mesh':
+                mesh(tmp, args[0])
+                matrix_mult( stack[-1], tmp )
+                draw_polygons(tmp, screen, zbuffer, view, ambient, light, symbols, reflect)
+                tmp = []
 
         if(name != 'default_gif' and num_frames != 1):
             diff = len(str(num_frames)) - len(str(count))
