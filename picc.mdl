@@ -1,0 +1,31 @@
+constants grass_green 0.3 0.3 1 0.74 0.74 1 0.2 0.2 1
+constants brown 0.38 0.38 0.5 0.2 0.2 0.5 .07 .07 .5
+
+basename picture
+
+push
+move 100 200 0
+scale 15 15 15
+rotate x 20
+rotate y 25
+
+box brown 5 5 5 1 7 1
+cone grass_green 5.5 8 4.5 1.3 4
+
+box brown 10 10 10 1 7 1
+cone grass_green 10.5 13 9.5 1.3 4
+
+box brown 15 15 15 1 7 1
+cone grass_green 15.5 18 14.5 1.3 4
+
+box brown 7 14 5 1 7 1
+cone grass_green 7.5 17 4.5 1.3 4
+
+box brown 15 14 5 1 7 1
+cone grass_green 15.5 17 4.5 1.3 4
+
+mesh :lamp
+
+
+
+save pic.png
